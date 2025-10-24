@@ -22,11 +22,11 @@ SET time_zone = "+00:00";
 --
 
 -- --------------------------------------------------------
-
 --
 -- Table structure for table `admin`
 --
 
+DROP TABLE IF EXISTS `admin`;
 CREATE TABLE `admin` (
   `id` int(11) NOT NULL,
   `UserName` varchar(100) NOT NULL,
@@ -37,16 +37,15 @@ CREATE TABLE `admin` (
 --
 -- Dumping data for table `admin`
 --
-
 INSERT INTO `admin` (`id`, `UserName`, `Password`, `updationDate`) VALUES
 (1, 'admin', '5c428d8875d2948607f3e3fe134d71b4', '2023-08-31 11:42:58');
 
 -- --------------------------------------------------------
-
 --
 -- Table structure for table `tbldepartments`
 --
 
+DROP TABLE IF EXISTS `tbldepartments`;
 CREATE TABLE `tbldepartments` (
   `id` int(11) NOT NULL,
   `DepartmentName` varchar(150) DEFAULT NULL,
@@ -58,7 +57,6 @@ CREATE TABLE `tbldepartments` (
 --
 -- Dumping data for table `tbldepartments`
 --
-
 INSERT INTO `tbldepartments` (`id`, `DepartmentName`, `DepartmentShortName`, `DepartmentCode`, `CreationDate`) VALUES
 (1, 'Human Resource', 'HR', 'HR01', '2023-08-31 14:50:20'),
 (2, 'Information Technology', 'IT', 'IT01', '2023-08-31 14:50:56'),
@@ -66,11 +64,11 @@ INSERT INTO `tbldepartments` (`id`, `DepartmentName`, `DepartmentShortName`, `De
 (4, 'ADMIN', 'Admin', 'ADMN01', '2023-09-01 11:35:50');
 
 -- --------------------------------------------------------
-
 --
 -- Table structure for table `tblemployees`
 --
 
+DROP TABLE IF EXISTS `tblemployees`;
 CREATE TABLE `tblemployees` (
   `id` int(11) NOT NULL,
   `EmpId` varchar(100) NOT NULL,
@@ -92,18 +90,17 @@ CREATE TABLE `tblemployees` (
 --
 -- Dumping data for table `tblemployees`
 --
-
 INSERT INTO `tblemployees` (`id`, `EmpId`, `FirstName`, `LastName`, `EmailId`, `Password`, `Gender`, `Dob`, `Department`, `Address`, `City`, `Country`, `Phonenumber`, `Status`, `RegDate`) VALUES
 (1, '10805121', 'Rahul', 'Kumar', 'rk1995@test.com', 'f925916e2754e5e03f75dd58a5733251', 'Male', '3 August, 1995', 'Information Technology', 'A 123 XYZ Apartment ', 'New Delhi', 'India', '12121212', 1, '2023-08-31 14:56:23'),
 (2, '10235612', 'Garima', 'Yadav', 'grama123@gmail.com', 'f925916e2754e5e03f75dd58a5733251', 'Female', '2 January, 1997', 'Accounts', 'Hno 123 ABC Colony', 'New Delhi', 'India', '7485963210', 1, '2023-08-31 15:02:47'),
 (5, '7856214', 'John', 'Doe', 'jhn12@gmail.com', 'f925916e2754e5e03f75dd58a5733251', 'Male', '3 January, 1995', 'Accounts', 'H no 1', 'Ghaziabad ', 'India', '23232323', 1, '2023-09-01 11:38:23');
 
 -- --------------------------------------------------------
-
 --
 -- Table structure for table `tblleaves`
 --
 
+DROP TABLE IF EXISTS `tblleaves`;
 CREATE TABLE `tblleaves` (
   `id` int(11) NOT NULL,
   `LeaveType` varchar(110) DEFAULT NULL,
@@ -121,17 +118,16 @@ CREATE TABLE `tblleaves` (
 --
 -- Dumping data for table `tblleaves`
 --
-
 INSERT INTO `tblleaves` (`id`, `LeaveType`, `ToDate`, `FromDate`, `Description`, `PostingDate`, `AdminRemark`, `AdminRemarkDate`, `Status`, `IsRead`, `empid`) VALUES
 (11, 'Casual Leaves', '17/09/2023', '10/09/2023', 'I need leave to visit my home town. ', '2023-08-31 15:06:21', 'Approved', '2023-08-31 20:39:40 ', 1, 1, 1),
 (12, 'Casual Leaves', '15/09/2023', '09/09/2023', 'Need casual leaves for some personal work.', '2023-09-01 11:42:40', 'Leave approved', '2023-09-01 17:13:20 ', 1, 1, 5);
 
 -- --------------------------------------------------------
-
 --
 -- Table structure for table `tblleavetype`
 --
 
+DROP TABLE IF EXISTS `tblleavetype`;
 CREATE TABLE `tblleavetype` (
   `id` int(11) NOT NULL,
   `LeaveType` varchar(200) DEFAULT NULL,
@@ -142,81 +138,25 @@ CREATE TABLE `tblleavetype` (
 --
 -- Dumping data for table `tblleavetype`
 --
-
 INSERT INTO `tblleavetype` (`id`, `LeaveType`, `Description`, `CreationDate`) VALUES
 (1, 'Casual Leaves', 'Casual Leaves', '2023-08-31 14:52:22'),
 (2, 'Earned Leaves', 'Earned Leaves', '2023-08-31 14:52:49'),
 (3, 'Sick Leaves', 'Sick Leaves', '2023-08-31 14:53:15'),
 (4, 'RH (Restricted Leaves)', 'Restricted Leaves', '2023-09-01 11:37:06');
 
---
--- Indexes for dumped tables
---
+-- Indexes and AUTO_INCREMENT sections remain the same
+ALTER TABLE `admin` ADD PRIMARY KEY (`id`);
+ALTER TABLE `tbldepartments` ADD PRIMARY KEY (`id`);
+ALTER TABLE `tblemployees` ADD PRIMARY KEY (`id`);
+ALTER TABLE `tblleaves` ADD PRIMARY KEY (`id`), ADD KEY `UserEmail` (`empid`);
+ALTER TABLE `tblleavetype` ADD PRIMARY KEY (`id`);
 
---
--- Indexes for table `admin`
---
-ALTER TABLE `admin`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `admin` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `tbldepartments` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+ALTER TABLE `tblemployees` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+ALTER TABLE `tblleaves` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+ALTER TABLE `tblleavetype` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
---
--- Indexes for table `tbldepartments`
---
-ALTER TABLE `tbldepartments`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `tblemployees`
---
-ALTER TABLE `tblemployees`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `tblleaves`
---
-ALTER TABLE `tblleaves`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `UserEmail` (`empid`);
-
---
--- Indexes for table `tblleavetype`
---
-ALTER TABLE `tblleavetype`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `admin`
---
-ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `tbldepartments`
---
-ALTER TABLE `tbldepartments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `tblemployees`
---
-ALTER TABLE `tblemployees`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `tblleaves`
---
-ALTER TABLE `tblleaves`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
---
--- AUTO_INCREMENT for table `tblleavetype`
---
-ALTER TABLE `tblleavetype`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
